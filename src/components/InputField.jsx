@@ -1,47 +1,33 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { Button } from "./Button";
+import { AddButton, LoginButton } from "./Button";
 
-export function InputCard() {
-  const navigate = useNavigate();
-
-  const [name, setName] = useState("");
-
-  const [email, setEmail] = useState("");
-
-  const [password, setPassword] = useState("");
-
-  const [errorMessage, setErrorMessage] = useState("");
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    setErrorMessage("");
-
-    if (password.length < 8) {
-      setErrorMessage(`Password must be at least 8 characters long.`);
-      return;
-    }
-    navigate("/dashboard");
-  };
-
+export function InputCard({
+  username,
+  setUserName,
+  email,
+  setEmail,
+  password,
+  setPassword,
+  errorMessage,
+  handleSubmit,
+}) {
   return (
     <div>
       <div className="header">
         <h3>Student Managament System</h3>
       </div>
-      {errorMessage && <p className="error-banner">{errorMessage}</p>}
+
       <div className="input-wrapper">
         <form onSubmit={handleSubmit}>
           <div className="form-card">
-            <label htmlFor="user-name">Name :</label>
+            <label htmlFor="username">Username:</label>
             <input
               type="text"
-              id="user-name"
-              value={name}
+              id="username"
+              value={username}
               placeholder="enter your name"
               required
               onChange={(event) => {
-                setName(event.target.value);
+                setUserName(event.target.value);
               }}
             />
           </div>
@@ -68,11 +54,92 @@ export function InputCard() {
                 setPassword(event.target.value);
               }}
               required
-            />
+            />{" "}
+            {errorMessage && (
+              <span className="error-banner">{errorMessage}</span>
+            )}
           </div>
-          <Button />
+          <LoginButton />
         </form>
       </div>
+    </div>
+  );
+}
+
+export function StudentInput({
+  studentname,
+  setStudentName,
+  studentage,
+  setStudentAge,
+  gender,
+  setGender,
+  course,
+  setCourse,
+  handleSubmit, errorMessage
+}) {
+  return (
+    <div className="student-form">
+      <h3>Add Student</h3>
+      <form onSubmit={handleSubmit}>
+        <div className="input-card">
+          <label htmlFor="student-name">Student Name</label>
+          <input
+            type="text"
+            id="student-name"
+            value={studentname}
+            placeholder="enter student name"
+            onChange={(event) => {
+              setStudentName(event.target.value);
+            }}
+            required
+          />
+        </div>
+        <div className="input-card">
+          <label htmlFor="age">Age</label>
+          <input
+            type="number"
+            id="age"
+            value={studentage}
+            placeholder="enter age"
+            onChange={(event) => {
+              setStudentAge(event.target.value);
+            }}
+            required
+          />
+        </div>
+        <div className="input-card">
+          <label htmlFor="gender">Gender</label>
+          <select
+            id="gender"
+            value={gender}
+            onChange={(event) => {
+              setGender(event.target.value);
+            }}
+            required
+          >
+            <option value="" disabled>
+              Select Gender
+            </option>
+            <option value="female">Female</option>
+            <option value="male">Male</option>
+          </select>
+        </div>
+        <div className="input-card">
+          <label htmlFor="course">Course</label>
+          <input
+            type="text"
+            id="course"
+            value={course}
+            placeholder="enter student major"
+            onChange={(event) => {
+              setCourse(event.target.value);
+            }}
+            required
+          />
+        </div>
+        {errorMessage && ( <span className="error-banner">{errorMessage}</span>)}
+        <AddButton/>
+      </form>
     </div>
   );
 }

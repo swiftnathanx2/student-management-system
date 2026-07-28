@@ -38,7 +38,7 @@ body {
   width: 100%;
   max-width: 450px;
   padding: 50px 30px;
-  background-color: #ffff;
+  background-color: rgb(255, 255, 255);
   border: solid 1px #8ab0db;
   border-radius: 30px;
   box-sizing: border-box;
@@ -75,7 +75,7 @@ body {
   border-color: #3b82f6;
 }
 
-.btn-submit button {
+.btn button {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -89,7 +89,18 @@ body {
   color: #ffff;
 }
 
-.btn-submit button:hover {
+.btn button:hover {
   background-color: #3b82f6;
   cursor: pointer;
 }
+
+.error-banner {
+  color: #f50c33;
+}
+
+.navigation {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* Dashboard Styles */
